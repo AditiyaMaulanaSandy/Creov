@@ -68,7 +68,7 @@ function updateQty(change) {
     document.getElementById('mainQtyDisplay').innerText = tempQty;
 }
 
-// --- 3. LOGIKA CHECKOUT ---
+// --- 3. LOGIKA CHECKOUT & RESET FORM ---
 function proceedToCheckout() {
     const subtotal = tempQty * creoveProduct.price;
     currentTotalHarga = subtotal;
@@ -80,6 +80,29 @@ function proceedToCheckout() {
     if (productEl) productEl.innerHTML = `<strong>${creoveProduct.name} (x${tempQty})</strong><br>Total: ${formatRupiah(subtotal)}`;
     
     if (modal) modal.classList.remove('hidden');
+}
+
+function resetForm() {
+    // Kosongkan semua input teks dan pilihan
+    document.getElementById('custName').value = '';
+    document.getElementById('custPhone').value = '';
+    document.getElementById('deliverySelect').value = '';
+    document.getElementById('paymentSelect').value = '';
+    document.getElementById('addressInput').value = '';
+
+    // Sembunyikan kembali form alamat
+    document.getElementById('addressWrap').style.display = 'none';
+
+    // Kembalikan jumlah pesanan ke 1
+    tempQty = 1;
+    document.getElementById('mainQtyDisplay').innerText = tempQty;
+
+    // Bersihkan semua error merah
+    clearError('custName');
+    clearError('custPhone');
+    clearError('deliverySelect');
+    clearError('paymentSelect');
+    clearError('addressInput');
 }
 
 // --- 4. TAMPILAN ERROR MERAH ---
@@ -194,9 +217,13 @@ async function prosesPesanan() {
         const sellerNumber = '6281345700451'; 
         const waUrl = `https://wa.me/${sellerNumber}?text=${encodeURIComponent(pesananDetail)}`;
         
-        // --- KUNCI PERBAIKAN: Menggunakan window.location.href ---
+        // Menggunakan window.location.href agar WhatsApp langsung terbuka (bypass popup blocker)
         window.location.href = waUrl; 
 
+        // Reset form ke kondisi awal setelah sukses
+        resetForm();
+
+        // Tutup modal
         document.getElementById('contactModal').classList.add('hidden');
 
     } catch (error) {
@@ -204,7 +231,6 @@ async function prosesPesanan() {
         alert("Terjadi gangguan koneksi, namun kamu akan tetap diarahkan ke WhatsApp.");
         const fallbackUrl = `https://wa.me/6281345700451?text=${encodeURIComponent(currentMessage)}`;
         
-        // --- PERBAIKAN JUGA DI BAGIAN ERROR ---
         window.location.href = fallbackUrl;
     } finally {
         btn.innerHTML = originalText;

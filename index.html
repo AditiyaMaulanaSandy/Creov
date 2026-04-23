@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creové — Elevated Layered Desserts</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="brand-name">Creové</h1>
+                <p class="brand-tagline">Taste It · Snap It · Love It</p>
+            </div>
+        </header>
+
+        <main class="menu-container">
+            <div class="section-heading">
+                <h2>Our Signatures</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="menu-grid" id="menuGrid">
+                </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Creové. All rights reserved.</p>
+            <div class="socials">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/6281345700451" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <button id="cartBtn" class="floating-cart hidden">
+        <i class="fas fa-shopping-bag"></i> (<span id="cartCount">0</span>)
+    </button>
+
+    <div id="contactModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detail Pesanan</h2>
+                <button id="modalClose" class="close-btn">&times;</button>
+            </div>
+            
+            <p id="modalProduct" style="margin-bottom: 20px; font-size: 15px; color: var(--text-muted);"></p>
+
+            <div class="form-group">
+                <label for="custName">Nama Pemesan</label>
+                <input id="custName" type="text" placeholder="Masukkan nama kamu" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="custPhone">No. WhatsApp</label>
+                <input id="custPhone" type="tel" placeholder="Contoh: 08123456789" required>
+            </div>
+
+            <div class="form-group">
+                <label for="deliverySelect">Metode Pengantaran</label>
+                <select id="deliverySelect" required>
+                    <option value="">-- Pilih Pengantaran --</option>
+                    <option value="COD">COD (Area Sekitar)</option>
+                    <option value="Pick up">Pick up (Ambil Sendiri)</option>
+                    <option value="Kurir">Kurir (DiAntar)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="paymentSelect">Metode Pembayaran</label>
+                <select id="paymentSelect" required>
+                    <option value="">-- Pilih Pembayaran --</option>
+                    <option value="Cash">Cash (Tunai)</option>
+                    <option value="QRIS">QRIS</option>
+                    <option value="Transfer">Transfer Bank</option>
+                </select>
+            </div>
+
+            <div id="addressWrap" class="form-group" style="display:none;">
+                <label for="addressInput">Alamat COD / Patokan</label>
+                <textarea id="addressInput" rows="3" placeholder="Tuliskan patokan lokasi sedetail mungkin..."></textarea>
+            </div>
+
+            <div class="modal-actions">
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px; text-align: center;">Kirim pesanan via:</p>
+                <button id="btnWhatsApp" class="action-btn wa-btn"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

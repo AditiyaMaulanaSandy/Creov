@@ -1,0 +1,339 @@
+/* CSS Variables untuk Tema Creové */
+:root {
+    --bg-color: #FAF8F5; /* Krem sangat muda seperti background foto */
+    --card-bg: #FFFFFF;
+    --text-main: #2C2A29; /* Charcoal / Warna Oreo */
+    --text-muted: #7A7571;
+    --accent: #B08D6A; /* Warna keemasan/coklat pudar elegan */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+.app-container {
+    max-width: 480px; /* Layout dibuat menyerupai tampilan App Mobile */
+    margin: 0 auto;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+/* Header */
+.hero {
+    background-color: var(--card-bg);
+    padding: 60px 20px 40px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.brand-name {
+    font-family: var(--font-heading);
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--text-main);
+}
+
+.brand-tagline {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+/* Menu Section */
+.menu-container {
+    padding: 40px 20px;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-heading h2 {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-style: italic;
+    color: var(--text-main);
+}
+
+.divider {
+    width: 40px;
+    height: 2px;
+    background-color: var(--accent);
+    margin: 10px auto 0;
+}
+
+/* Grid Menu */
+.menu-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.menu-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    transition: transform 0.3s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-4px);
+}
+
+.product-image {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    background-color: #EFEFEF; /* Placeholder jika gambar belum di-load */
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.product-name {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.product-price {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text-main);
+}
+
+.product-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+/* --- VISUAL LAYER STYLES --- */
+.layer-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding: 12px;
+    background-color: #FAF8F5; /* Warna krem super muda */
+    border-radius: 8px;
+    border-left: 3px solid var(--accent); /* Garis aksen di sebelah kiri */
+}
+
+.layer-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.layer-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%; /* Membuat indikator warnanya jadi bulat */
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.layer-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: 0.5px;
+}
+
+/* Button */
+.btn-order {
+    width: 100%;
+    background-color: var(--text-main);
+    color: var(--card-bg);
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-order:hover {
+    background-color: #1a1918;
+}
+
+/* Floating Cart */
+.floating-cart {
+    position: fixed;
+    bottom: 30px;
+    right: 50%;
+    transform: translateX(50%);
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 0 10px 25px rgba(176, 141, 106, 0.4);
+    cursor: pointer;
+    z-index: 100;
+}
+
+.floating-cart.hidden {
+    display: none;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.socials {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.socials a {
+    color: var(--text-main);
+    margin: 0 8px;
+    text-decoration: none;
+}
+
+/* --- Modal Styles --- */
+.modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Muncul dari bawah di mobile */
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    width: 100%;
+    max-width: 480px;
+    border-radius: 24px 24px 0 0;
+    padding: 30px 24px;
+    animation: slideUp 0.3s ease-out forwards;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.form-group {
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: var(--text-main);
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #E0DCD9;
+    font-family: var(--font-body);
+    background-color: #FAF8F5;
+    resize: vertical;
+}
+
+.action-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.wa-btn {
+    background-color: #25D366;
+}
+
+/* --- Error Validation Styles --- */
+.input-error-msg {
+    color: #CC0000;
+    font-size: 12px;
+    margin-top: 6px;
+    display: block;
+    font-weight: bold;
+    animation: fadeIn 0.3s ease;
+}
+
+.input-error-border {
+    border-color: #CC0000 !important;
+    background-color: #FFF5F5 !important;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}

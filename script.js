@@ -167,8 +167,12 @@ async function prosesPesanan() {
         if (deliveryMethod === 'COD' || deliveryMethod === 'Kurir') {
             alamatTambahan = `\nAlamat: ${document.getElementById('addressInput').value.trim()}`;
         }
+
+        // Ambil data metode pembayaran
+        const paymentMethod = document.getElementById('paymentSelect').value;
         
-        const pesananDetail = `*Order ID: ${orderId}*\n\n${currentMessage}\n\nNama: ${namaPembeli}\nMetode: ${deliveryMethod}${alamatTambahan}`;
+        // Masukkan semua detail (Pengantaran & Pembayaran) ke dalam pesan
+        const pesananDetail = `*Order ID: ${orderId}*\n\n${currentMessage}\n\nNama: ${namaPembeli}\nPengantaran: ${deliveryMethod}${alamatTambahan}\nPembayaran: ${paymentMethod}`;
 
         const payload = {
             orderId: orderId,
@@ -180,6 +184,7 @@ async function prosesPesanan() {
 
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxNbpGuXkRaOO1BuRNAl3CvUZYydwueGlzhvuc5ZJLKv3WY3G1QWdQx2EZ5_NSNH3o/exec'; 
 
+        // Tunggu data masuk ke Google Sheets
         await fetch(scriptURL, {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -188,7 +193,9 @@ async function prosesPesanan() {
 
         const sellerNumber = '6281345700451'; 
         const waUrl = `https://wa.me/${sellerNumber}?text=${encodeURIComponent(pesananDetail)}`;
-        window.open(waUrl, '_blank'); 
+        
+        // --- KUNCI PERBAIKAN: Menggunakan window.location.href ---
+        window.location.href = waUrl; 
 
         document.getElementById('contactModal').classList.add('hidden');
 
@@ -196,7 +203,9 @@ async function prosesPesanan() {
         console.error('Error:', error);
         alert("Terjadi gangguan koneksi, namun kamu akan tetap diarahkan ke WhatsApp.");
         const fallbackUrl = `https://wa.me/6281345700451?text=${encodeURIComponent(currentMessage)}`;
-        window.open(fallbackUrl, '_blank');
+        
+        // --- PERBAIKAN JUGA DI BAGIAN ERROR ---
+        window.location.href = fallbackUrl;
     } finally {
         btn.innerHTML = originalText;
         btn.disabled = false;

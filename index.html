@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creové — Elevated Layered Desserts</title>
     
+    <!-- Favicon (Ikon Tab Browser) -->
+    <link rel="icon" type="image/png" href="icon.png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
@@ -28,30 +31,34 @@
             </div>
             
             <div class="menu-grid" id="menuGrid">
-                </div>
+                <!-- Produk akan dimunculkan oleh JS di sini -->
+            </div>
         </main>
 
         <footer class="footer">
             <p>&copy; 2026 Creové. All rights reserved.</p>
             <div class="socials">
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/creove.id" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://wa.me/6281345700451" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
         </footer>
     </div>
 
+    <!-- Tombol Keranjang Melayang -->
     <button id="cartBtn" class="floating-cart hidden">
-        <i class="fas fa-shopping-bag"></i> (<span id="cartCount">0</span>)
+        <i class="fas fa-shopping-bag"></i> Checkout (<span id="cartCount">0</span>)
     </button>
 
+    <!-- Modal Form Checkout -->
     <div id="contactModal" class="modal hidden">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Detail Pesanan</h2>
+                <h2>Keranjang Belanja</h2>
                 <button id="modalClose" class="close-btn">&times;</button>
             </div>
             
-            <p id="modalProduct" style="margin-bottom: 20px; font-size: 15px; color: var(--text-muted);"></p>
+            <!-- Tempat daftar keranjang muncul -->
+            <div id="cartItemsList" class="cart-items-container"></div>
 
             <div class="form-group">
                 <label for="custName">Nama Pemesan</label>
@@ -90,10 +97,13 @@
 
             <div class="modal-actions">
                 <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px; text-align: center;">Kirim pesanan via:</p>
-                <button id="btnWhatsApp" class="action-btn wa-btn"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+                <button id="btnWhatsApp" class="action-btn wa-btn"><i class="fab fa-whatsapp"></i> Proses Pembayaran</button>
             </div>
         </div>
     </div>
+
+    <!-- Tempat untuk Notifikasi Toast (Taruh di atas script) -->
+    <div id="toastContainer" class="toast-container"></div>
 
     <script src="script.js"></script>
 </body>

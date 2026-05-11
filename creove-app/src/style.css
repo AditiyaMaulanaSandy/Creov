@@ -1,14 +1,19 @@
-/* CSS Variables untuk Tema Creové */
+/* =============================================================================
+   CSS VARIABLES — TEMA CREOVÉ
+   ============================================================================= */
 :root {
-    --bg-color: #FAF8F5; /* Krem sangat muda seperti background foto */
-    --card-bg: #FFFFFF;
-    --text-main: #2C2A29; /* Charcoal / Warna Oreo */
-    --text-muted: #7A7571;
-    --accent: #B08D6A; /* Warna keemasan/coklat pudar elegan */
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Lato', sans-serif;
+    --bg-color:      #FAF8F5;
+    --card-bg:       #FFFFFF;
+    --text-main:     #2C2A29;
+    --text-muted:    #7A7571;
+    --accent:        #B08D6A;
+    --font-heading:  'Playfair Display', serif;
+    --font-body:     'Lato', sans-serif;
 }
 
+/* =============================================================================
+   RESET & BASE
+   ============================================================================= */
 * {
     margin: 0;
     padding: 0;
@@ -23,19 +28,21 @@ body {
 }
 
 .app-container {
-    max-width: 480px; /* Layout dibuat menyerupai tampilan App Mobile */
+    max-width: 480px;
     margin: 0 auto;
     background-color: var(--bg-color);
     min-height: 100vh;
-    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
 }
 
-/* Header */
+/* =============================================================================
+   HEADER
+   ============================================================================= */
 .hero {
     background-color: var(--card-bg);
     padding: 60px 20px 40px;
     text-align: center;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .brand-name {
@@ -54,7 +61,9 @@ body {
     margin-top: 8px;
 }
 
-/* Menu Section */
+/* =============================================================================
+   MENU SECTION
+   ============================================================================= */
 .menu-container {
     padding: 40px 20px;
 }
@@ -78,18 +87,20 @@ body {
     margin: 10px auto 0;
 }
 
-/* Grid Menu */
 .menu-grid {
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
 
+/* =============================================================================
+   MENU CARD
+   ============================================================================= */
 .menu-card {
     background-color: var(--card-bg);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
     transition: transform 0.3s ease;
 }
 
@@ -97,7 +108,7 @@ body {
     transform: translateY(-4px);
 }
 
-/* --- SKELETON LOADING & IMAGE WRAPPER --- */
+/* Skeleton Loading */
 .image-wrapper {
     width: 100%;
     height: 240px;
@@ -111,25 +122,26 @@ body {
 }
 
 @keyframes skeleton-loading {
-    0% { background-color: #EFEFEF; }
-    100% { background-color: #DCD7D2; } /* Abu-abu sedikit gelap */
+    0%   { background-color: #EFEFEF; }
+    100% { background-color: #DCD7D2; }
 }
 
 .product-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0; /* Sembunyikan gambar sebelum ter-load */
-    transition: opacity 0.5s ease-in-out; /* Efek fade-in halus */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
     position: absolute;
     top: 0;
     left: 0;
 }
 
 .product-image.loaded {
-    opacity: 1; /* Munculkan gambar 100% saat sudah siap */
+    opacity: 1;
 }
 
+/* Product Info */
 .product-info {
     padding: 20px;
 }
@@ -159,7 +171,7 @@ body {
     margin-bottom: 16px;
 }
 
-/* --- VISUAL LAYER STYLES --- */
+/* Layer Visual */
 .layer-visual {
     display: flex;
     flex-direction: column;
@@ -167,9 +179,9 @@ body {
     margin-top: 15px;
     margin-bottom: 20px;
     padding: 12px;
-    background-color: #FAF8F5; /* Warna krem super muda */
+    background-color: #FAF8F5;
     border-radius: 8px;
-    border-left: 3px solid var(--accent); /* Garis aksen di sebelah kiri */
+    border-left: 3px solid var(--accent);
 }
 
 .layer-item {
@@ -181,9 +193,9 @@ body {
 .layer-color {
     width: 14px;
     height: 14px;
-    border-radius: 50%; /* Membuat indikator warnanya jadi bulat */
+    border-radius: 50%;
     display: inline-block;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .layer-text {
@@ -193,7 +205,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* Button */
+/* Add to Cart Button */
 .btn-order {
     width: 100%;
     background-color: var(--text-main);
@@ -210,15 +222,12 @@ body {
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.btn-order:hover {
-    background-color: #1a1918;
-}
+.btn-order:hover  { background-color: #1a1918; }
+.btn-order:active { transform: scale(0.98); }
 
-.btn-order:active {
-    transform: scale(0.98);
-}
-
-/* Floating Cart */
+/* =============================================================================
+   FLOATING CART BUTTON
+   ============================================================================= */
 .floating-cart {
     position: fixed;
     bottom: 30px;
@@ -245,7 +254,9 @@ body {
     display: none;
 }
 
-/* Footer */
+/* =============================================================================
+   FOOTER
+   ============================================================================= */
 .footer {
     text-align: center;
     padding: 40px 20px;
@@ -271,15 +282,18 @@ body {
     transform: scale(1.15);
 }
 
-/* --- Modal Styles --- */
+/* =============================================================================
+   MODAL
+   ============================================================================= */
 .modal {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
-    align-items: flex-end; /* Muncul dari bawah di mobile */
+    align-items: flex-end;
     z-index: 1000;
 }
 
@@ -295,12 +309,12 @@ body {
     padding: 30px 24px;
     animation: slideUp 0.3s ease-out forwards;
     max-height: 90vh;
-    overflow-y: auto; /* Agar modal bisa discroll kalau isinya panjang */
+    overflow-y: auto;
 }
 
 @keyframes slideUp {
     from { transform: translateY(100%); }
-    to { transform: translateY(0); }
+    to   { transform: translateY(0); }
 }
 
 .modal-header {
@@ -323,6 +337,7 @@ body {
     color: var(--text-muted);
 }
 
+/* Form */
 .form-group {
     margin-bottom: 16px;
     text-align: left;
@@ -336,7 +351,9 @@ body {
     color: var(--text-main);
 }
 
-.form-group input, .form-group select, .form-group textarea {
+.form-group input,
+.form-group select,
+.form-group textarea {
     width: 100%;
     padding: 12px;
     border-radius: 8px;
@@ -346,6 +363,7 @@ body {
     resize: vertical;
 }
 
+/* Modal Action */
 .action-btn {
     width: 100%;
     padding: 14px;
@@ -362,7 +380,9 @@ body {
     background-color: #25D366;
 }
 
-/* --- Error Validation Styles --- */
+/* =============================================================================
+   VALIDASI ERROR
+   ============================================================================= */
 .input-error-msg {
     color: #CC0000;
     font-size: 12px;
@@ -379,10 +399,12 @@ body {
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-4px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-/* --- DESAIN LIST KERANJANG (BARU) --- */
+/* =============================================================================
+   KERANJANG (CART ITEMS)
+   ============================================================================= */
 .cart-items-container {
     background-color: #FAF8F5;
     padding: 15px;
@@ -415,30 +437,32 @@ body {
     font-weight: 700;
 }
 
-/* --- TOAST NOTIFICATION STYLES --- */
+/* =============================================================================
+   TOAST NOTIFICATION
+   ============================================================================= */
 .toast-container {
     position: fixed;
-    bottom: 90px; /* Muncul tepat di atas tombol keranjang melayang */
+    bottom: 90px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 9999;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    pointer-events: none; /* Agar tidak menghalangi klik di web */
+    pointer-events: none;
     width: 90%;
     max-width: 350px;
 }
 
 .toast {
-    background-color: #2C2A29; /* Warna gelap agar kontras */
+    background-color: #2C2A29;
     color: #FFFFFF;
     padding: 12px 20px;
     border-radius: 30px;
     font-size: 13px;
     font-weight: 700;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     animation: slideUpFade 0.3s ease-out forwards;
     opacity: 0;
     display: flex;
@@ -453,10 +477,17 @@ body {
 
 @keyframes slideUpFade {
     from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    to   { transform: translateY(0);    opacity: 1; }
 }
 
 @keyframes fadeOutDown {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(20px); opacity: 0; }
+    from { transform: translateY(0);    opacity: 1; }
+    to   { transform: translateY(20px); opacity: 0; }
+}
+
+/* =============================================================================
+   SCROLL LOCK (saat modal terbuka)
+   ============================================================================= */
+body.no-scroll {
+    overflow: hidden;
 }

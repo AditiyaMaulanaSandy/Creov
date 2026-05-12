@@ -200,7 +200,7 @@ const App = () => {
         <p>&copy; 2026 Creové. All rights reserved.</p>
         <div className="socials">
           <a
-            href="https://www.instagram.com/creove.id"
+            href="https://www.instagram.com/dessert.creove/"
             target="_blank"
             rel="noreferrer"
           >

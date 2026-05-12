@@ -19,7 +19,7 @@ const App = () => {
   const [errors, setErrors] = useState({});
 
   const SCRIPT_URL =
-    'https://script.google.com/macros/s/AKfycbxNbpGuXkRaOO1BuRNAl3CvUZYydwueGlzhvuc5ZJLKv3WY3G1QWdQx2EZ5_NSNH3o/exec';
+    'https://script.google.com/macros/s/AKfycbyQJLmhvZl-k932BihUyOSi1hDgazskBQJAzi63TpgP5sjzbGebm-YQ08NEpENj978/exec';
   const WA_NUMBER = '6281345700451';
 
   useEffect(() => {

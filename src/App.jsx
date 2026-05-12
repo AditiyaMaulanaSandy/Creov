@@ -23,8 +23,12 @@ const App = () => {
   const WA_NUMBER = '6281345700451';
 
   useEffect(() => {
-    document.body.classList.toggle('no-scroll', isModalOpen);
-  }, [isModalOpen]);
+  if (isModalOpen) {
+    document.body.style.overflow = 'hidden'; // Kunci scroll layar utama
+  } else {
+    document.body.style.overflow = 'unset';
+  }
+}, [isModalOpen]);
 
   const totalItems = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
 

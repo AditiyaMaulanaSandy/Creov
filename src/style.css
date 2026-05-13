@@ -336,16 +336,16 @@ body {
    MODAL
    ============================================================================= */
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: flex-end; /* Modal muncul dari bawah di HP agar lebih nyaman */
-    justify-content: center;
-    z-index: 2000;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 24, 22, 0.56);
+  display: flex;
+  align-items: flex-end; /* Modal muncul dari bawah di HP agar lebih nyaman */
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(5px);
 }
 
 .modal.hidden {
@@ -353,27 +353,33 @@ body {
 }
 
 .modal-content {
-    background-color: #fff;
-    width: 100%;
-    max-width: 500px;
-    max-height: 90vh; /* Maksimal 90% tinggi layar agar tidak mentok atas */
-    border-radius: 20px 20px 0 0; /* Membulat di atas saja khas mobile app */
-    padding: 20px;
-    
-    /* KUNCI UTAMA: Agar bisa di-scroll saat keyboard muncul */
-    overflow-y: auto; 
-    position: relative;
-    
-    /* Tambahan agar scroll lebih halus di iOS/Android */
-    -webkit-overflow-scrolling: touch; 
+  background:
+    linear-gradient(180deg, #ffffff 0%, #fffdfb 100%);
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh; /* Maksimal 90% tinggi layar agar tidak mentok atas */
+  border-radius: 24px 24px 0 0; /* Membulat di atas saja khas mobile app */
+  padding: 22px 18px max(28px, env(safe-area-inset-bottom));
+  box-shadow: 0 -18px 50px rgba(44, 42, 41, 0.24);
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.28s ease-out;
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal-content::before {
+  content: "";
+  display: block;
+  width: 46px;
+  height: 5px;
+  margin: 0 auto 18px;
+  border-radius: 99px;
+  background-color: #ded7d1;
 }
 
 .modal-actions {
-    margin-top: 20px;
-    
-    /* Berikan padding bawah yang besar agar form bisa di-scroll 
-       lebih tinggi dari posisi keyboard */
-    padding-bottom: 250px; 
+  margin-top: 20px;
+  padding-bottom: 0;
 }
 
 @keyframes slideUp {
@@ -385,20 +391,33 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #eee8e2;
 }
 
 .modal-header h2 {
   font-family: var(--font-heading);
-  font-size: 22px;
+  font-size: 24px;
+  color: #3b2f2f;
 }
 
 .close-btn {
-  background: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #faf8f5;
   border: none;
-  font-size: 28px;
+  font-size: 26px;
   cursor: pointer;
   color: var(--text-muted);
+  line-height: 1;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.close-btn:hover {
+  background-color: #f1ebe5;
+  color: var(--text-main);
 }
 
 /* Form */
@@ -481,34 +500,102 @@ body {
    KERANJANG (CART ITEMS)
    ============================================================================= */
 .cart-items-container {
-  background-color: #faf8f5;
-  padding: 15px;
-  border-radius: 12px;
+  background:
+    linear-gradient(180deg, #fffaf5 0%, #ffffff 100%);
+  padding: 16px;
+  border-radius: 18px;
   margin-bottom: 24px;
-  border: 1px solid #e0dcd9;
+  border: 1px solid #eadfd6;
+  box-shadow: 0 14px 34px rgba(74, 52, 35, 0.08);
+}
+
+.cart-panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.cart-panel-eyebrow {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.cart-panel-header h3 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--text-main);
+}
+
+.cart-count-pill {
+  flex: 0 0 auto;
+  background-color: #f1e7dc;
+  color: #65472d;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .cart-item-row {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) 34px;
+  gap: 12px;
   align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid #eae5e0;
+  padding: 12px;
+  border: 1px solid #eee5dc;
+  border-radius: 14px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 22px rgba(74, 52, 35, 0.05);
 }
 
-.cart-item-row:last-of-type {
-  border-bottom: none;
+.cart-item-image {
+  width: 58px;
+  height: 58px;
+  border-radius: 12px;
+  object-fit: cover;
+  background-color: #eee7df;
+}
+
+.cart-item-main {
+  min-width: 0;
+}
+
+.cart-item-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 7px;
 }
 
 .cart-item-name {
   font-weight: 700;
   font-size: 14px;
   color: #4a3b2c;
+  line-height: 1.35;
 }
 
 .cart-item-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
   font-size: 12px;
   color: #8a7a6b;
+  line-height: 1.2;
 }
 
 .cart-item-right {
@@ -519,45 +606,123 @@ body {
 
 .cart-item-subtotal {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   color: #4a3b2c;
+  white-space: nowrap;
 }
 
 .cart-item-remove {
-  background: none;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff4f2;
   border: none;
-  color: #a67c52;
+  border-radius: 50%;
+  color: #bd4b3f;
   cursor: pointer;
-  padding: 5px;
-  transition: color 0.2s;
+  padding: 0;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.cart-item-remove:hover {
+  background-color: #ffe5e1;
+  transform: scale(1.04);
+}
+
+.cart-qty-badge,
+.cart-promo-badge {
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-weight: 800;
+}
+
+.cart-qty-badge {
+  background-color: #f2ebe4;
+  color: #5a3d27;
+}
+
+.cart-promo-badge {
+  background-color: #eaf7ef;
+  color: #1c7d46;
+}
+
+.cart-empty-state {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  padding: 26px 16px;
+  border: 1px dashed #ddcfc3;
+  border-radius: 14px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.cart-empty-state i {
+  font-size: 26px;
+  color: var(--accent);
+}
+
+.cart-empty-state p {
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .cart-summary {
-  margin-top: 20px;
-  padding-top: 10px;
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  background-color: #3b2f2f;
+  color: #fff;
+  text-align: left;
 }
 
 .cart-summary-label {
   font-size: 12px;
-  color: #8a7a6b;
-  font-weight: 600;
+  color: rgba(255, 255, 255, 0.76);
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 }
 
 .cart-summary-total {
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 800;
-  color: #3b2f2f;
+  color: #ffffff;
+  white-space: nowrap;
 }
 
 .cart-clear-btn {
-  background: none;
-  border: none;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px dashed #dccbc0;
+  border-radius: 12px;
   color: #cc0000;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 12px;
+  padding: 11px 14px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.cart-clear-btn:hover {
+  background-color: #fff4f2;
+  border-color: #ecc1bc;
+}
+
+.cart-clear-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
 }
 
 .cart-total-row {
@@ -628,6 +793,7 @@ body.no-scroll {
    PROMO BANNER (UPSELLING)
    ============================================================================= */
 .promo-banner {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -637,7 +803,13 @@ body.no-scroll {
   padding: 12px 15px;
   margin-bottom: 20px;
   cursor: pointer;
+  font: inherit;
+  text-align: left;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.promo-banner:hover {
+  box-shadow: 0 8px 18px rgba(166, 124, 82, 0.12);
 }
 
 .promo-banner:active {

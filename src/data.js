@@ -1,3 +1,7 @@
+export const OREO_PRODUCT_ID = 'CRV-01';
+export const OREO_PROMO_BUNDLE_QTY = 3;
+export const OREO_PROMO_PRICE = 25000;
+
 export const creoveProducts = [
   {
     id: "CRV-01",
@@ -26,6 +30,42 @@ export const creoveProducts = [
     ]
   }
 ];
+
+export const getProductById = (id) => {
+  return creoveProducts.find((product) => product.id === id);
+};
+
+export const getCartItemPricing = (id, qty) => {
+  const product = getProductById(id);
+  const quantity = Math.floor(Number(qty));
+
+  if (!product || !Number.isFinite(quantity) || quantity <= 0) {
+    return null;
+  }
+
+  if (id === OREO_PRODUCT_ID && quantity >= OREO_PROMO_BUNDLE_QTY) {
+    const promoBundles = Math.floor(quantity / OREO_PROMO_BUNDLE_QTY);
+    const normalQty = quantity % OREO_PROMO_BUNDLE_QTY;
+
+    return {
+      product,
+      qty: quantity,
+      subtotal: promoBundles * OREO_PROMO_PRICE + normalQty * product.price,
+      promoBundles,
+      normalQty,
+      isPromoApplied: true,
+    };
+  }
+
+  return {
+    product,
+    qty: quantity,
+    subtotal: quantity * product.price,
+    promoBundles: 0,
+    normalQty: quantity,
+    isPromoApplied: false,
+  };
+};
 
 export const formatRupiah = (number) => {
   return new Intl.NumberFormat('id-ID', {

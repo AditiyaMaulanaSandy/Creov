@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { formatRupiah } from '../data';
 
 const ProductCard = ({ product, onAddToCart }) => {

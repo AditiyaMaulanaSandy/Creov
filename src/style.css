@@ -451,6 +451,11 @@ body {
   color: white;
 }
 
+.action-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
 .wa-btn {
   background-color: #25d366;
 }

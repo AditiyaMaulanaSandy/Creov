@@ -1,12 +1,17 @@
-import React from 'react';
-import { creoveProducts, formatRupiah } from '../data';
+import {
+  OREO_PRODUCT_ID,
+  OREO_PROMO_BUNDLE_QTY,
+  formatRupiah,
+  getCartItemPricing,
+} from '../data';
 
 const CartItemsList = ({ cart, clearCart, onAddPromo, onRemoveItem }) => {
   let grandTotal = 0;
 
-  const oreoQty = cart['CRV-01'] || 0;
-  const sisaUntukPromo = oreoQty % 3;
-  const butuhBerapaLagi = sisaUntukPromo > 0 ? 3 - sisaUntukPromo : 0;
+  const oreoQty = cart[OREO_PRODUCT_ID] || 0;
+  const sisaUntukPromo = oreoQty % OREO_PROMO_BUNDLE_QTY;
+  const butuhBerapaLagi =
+    sisaUntukPromo > 0 ? OREO_PROMO_BUNDLE_QTY - sisaUntukPromo : 0;
 
   return (
     <div className="cart-items-container">
@@ -26,19 +31,16 @@ const CartItemsList = ({ cart, clearCart, onAddPromo, onRemoveItem }) => {
       )}
 
       {Object.entries(cart).map(([id, qty]) => {
-        const product = creoveProducts.find((p) => p.id === id);
-        let subtotal = 0;
-        let infoHarga = '';
+        const pricing = getCartItemPricing(id, qty);
 
-        if (id === 'CRV-01' && qty >= 3) {
-          const paket = Math.floor(qty / 3);
-          const sisa = qty % 3;
-          subtotal = paket * 25000 + sisa * product.price;
-          infoHarga = `Promo x${paket}${sisa > 0 ? ` + Normal x${sisa}` : ''}`;
-        } else {
-          subtotal = qty * product.price;
-          infoHarga = `${qty} pcs`;
-        }
+        if (!pricing) return null;
+
+        const { product, subtotal } = pricing;
+        const infoHarga = pricing.isPromoApplied
+          ? `Promo x${pricing.promoBundles}${
+              pricing.normalQty > 0 ? ` + Normal x${pricing.normalQty}` : ''
+            }`
+          : `${pricing.qty} pcs`;
 
         grandTotal += subtotal;
 

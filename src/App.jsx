@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { creoveProducts, formatRupiah } from './data';
+import { useEffect, useState } from 'react';
+import {
+  OREO_PRODUCT_ID,
+  creoveProducts,
+  formatRupiah,
+  getCartItemPricing,
+  getProductById,
+} from './data';
 import ProductCard from './components/ProductCard';
 import CartItemsList from './components/CartItemsList';
 import './style.css';
@@ -23,12 +29,15 @@ const App = () => {
   const WA_NUMBER = '6281345700451';
 
   useEffect(() => {
-  if (isModalOpen) {
-    document.body.style.overflow = 'hidden'; // Kunci scroll layar utama
-  } else {
-    document.body.style.overflow = 'unset';
-  }
-}, [isModalOpen]);
+    if (!isModalOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isModalOpen]);
 
   const totalItems = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
 
@@ -44,15 +53,21 @@ const App = () => {
   };
 
   const addToCart = (product, qtyToAdd) => {
+    const quantity = Math.floor(Number(qtyToAdd));
+
+    if (!product || !Number.isFinite(quantity) || quantity <= 0) {
+      return;
+    }
+
     setCart((prev) => ({
       ...prev,
-      [product.id]: (prev[product.id] || 0) + qtyToAdd,
+      [product.id]: (prev[product.id] || 0) + quantity,
     }));
-    showToast(product.name, qtyToAdd);
+    showToast(product.name, quantity);
   };
 
   const handleAddPromoOreo = () => {
-    const oreoProduct = creoveProducts.find((p) => p.id === 'CRV-01');
+    const oreoProduct = getProductById(OREO_PRODUCT_ID);
     addToCart(oreoProduct, 1);
   };
 
@@ -96,22 +111,22 @@ const App = () => {
     let waMessage = 'Halo! Saya ingin memesan:\n\n';
 
     Object.entries(cart).forEach(([id, qty]) => {
-      const product = creoveProducts.find((p) => p.id === id);
-      let subtotal = 0;
+      const pricing = getCartItemPricing(id, qty);
+
+      if (!pricing) return;
+
+      const { product, subtotal } = pricing;
       let waNote = '';
 
-      if (id === 'CRV-01' && qty >= 3) {
-        const jumlahPaketPromo = Math.floor(qty / 3);
-        const sisaNormal = qty % 3;
-        subtotal = jumlahPaketPromo * 25000 + sisaNormal * product.price;
-        waNote = `(Promo Paket 3pcs x${jumlahPaketPromo})`;
-        if (sisaNormal > 0) waNote += ` + (Normal x${sisaNormal})`;
-      } else {
-        subtotal = qty * product.price;
+      if (pricing.isPromoApplied) {
+        waNote = `(Promo Paket 3pcs x${pricing.promoBundles})`;
+        if (pricing.normalQty > 0) {
+          waNote += ` + (Normal x${pricing.normalQty})`;
+        }
       }
 
       grandTotal += subtotal;
-      waMessage += `- ${product.name} (x${qty}) = ${formatRupiah(subtotal)}\n`;
+      waMessage += `- ${product.name} (x${pricing.qty}) = ${formatRupiah(subtotal)}\n`;
       if (waNote) waMessage += `  ${waNote}\n`;
     });
 
@@ -121,6 +136,13 @@ const App = () => {
   };
 
   const prosesPesanan = async () => {
+    if (isSubmitting) return;
+
+    if (totalItems === 0) {
+      alert('Keranjang masih kosong.');
+      return;
+    }
+
     if (!validateForm()) return;
     setIsSubmitting(true);
 
@@ -351,14 +373,18 @@ const App = () => {
             <button
               className="action-btn wa-btn"
               onClick={prosesPesanan}
-              disabled={isSubmitting}
+              disabled={isSubmitting || totalItems === 0}
             >
               {isSubmitting ? (
                 <i className="fas fa-spinner fa-spin"></i>
               ) : (
                 <i className="fab fa-whatsapp"></i>
               )}{' '}
-              {isSubmitting ? 'Memproses...' : 'Proses Pembayaran'}
+              {totalItems === 0
+                ? 'Keranjang Kosong'
+                : isSubmitting
+                  ? 'Memproses...'
+                  : 'Proses Pembayaran'}
             </button>
           </div>
         </div>
